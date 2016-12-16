@@ -10,7 +10,7 @@ module.exports = {
   },
 
   mongoose: {
-    uri: 'mongodb://localhost/app',
+    uri: 'mongodb://127.0.0.1/hw7',
     options: {
       server: {
         socketOptions: {
