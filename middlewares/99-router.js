@@ -7,6 +7,8 @@ const Router = require('koa-router');
 const router = new Router();
 
 const mongoose = require('mongoose');
+const User = require('../models/user');
+
 /*
  async function *isAuthenticated(next) {
  if (!ctx.isAuthenticated) {
