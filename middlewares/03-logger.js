@@ -2,4 +2,8 @@
 const logger = require('koa-logger');
 const convert = require('koa-convert');
 
-exports.init = app => app.use(convert(logger()));
+exports.init = app => {
+  if (process.env.NODE_ENV === 'development') {
+    app.use(convert(logger()));
+  }
+};
