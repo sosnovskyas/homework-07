@@ -64,9 +64,9 @@ describe('server', () => {
 
 
     afterEach(async() => {
-      await mongoose.model('User').find({}, (err, res) => {
-        console.log(res)
-      });
+      // await mongoose.model('User').find({}, (err, res) => {
+      //   console.log(res)
+      // });
       await mongoose.connection.close();
     });
 
