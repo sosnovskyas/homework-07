@@ -1,7 +1,9 @@
 'use strict';
 
+const db = require('mongoose');
+
 const handler = async(ctx) => {
-  ctx.body = 'users response';
+  ctx.body = await db.model('User').find({});
 };
 
 exports.route = {
