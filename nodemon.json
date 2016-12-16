@@ -6,8 +6,9 @@
   },
   "ext": "js json pug",
   "watch": [
-    "index",
-    "app",
+    "index.js",
+    "app.js",
+    "models/**/*",
     "middlewares/**/*",
     "routes/**/*",
     "templates/**/*",
