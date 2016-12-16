@@ -1,5 +1,4 @@
 const oid = require('../libs/oid');
-require('../models/user');
 
 exports.User = [{
   _id: oid('user-mk'),
