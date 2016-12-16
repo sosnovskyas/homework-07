@@ -18,7 +18,9 @@
     "start": "NODE_ENV=development nodemon index.js",
     "test": "NODE_ENV=test mocha --harmony",
     "test:watch": "NODE_ENV=test mocha -w --harmony ",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "db:start": "mongod --dbpath ./db/",
+    "db:stop": "pkill mongo"
   },
   "author": "Sosnovsky Alexey <sosnovsky.as@gmail.com>",
   "license": "GPL-3.0",
