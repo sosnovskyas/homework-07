@@ -1,6 +1,6 @@
 {
   "name": "homework-07",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "basic backend for web service",
   "main": "index.js",
   "repository": {
