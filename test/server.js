@@ -40,6 +40,18 @@ describe('server', () => {
     });
   });
 
-  context('REST API', () => {
+  describe('REST API', () => {
+    context('users', () => {
+      it(`GET ${serverPath}/users response status 200`, async() => {
+      /*it(`GET ${serverPath}/users response status 200 and list defaul users`, async() => {*/
+        let response = await request({
+          method: 'get',
+          uri: `${serverPath}/users`,
+          json: true,
+        });
+
+        should(response.statusCode).eql(200);
+      });
+    });
   });
 });
