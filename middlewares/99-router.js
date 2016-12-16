@@ -7,7 +7,6 @@ const Router = require('koa-router');
 const router = new Router();
 
 const mongoose = require('mongoose');
-const User = require('../models/user');
 
 /*
  async function *isAuthenticated(next) {
@@ -39,12 +38,13 @@ routes.forEach(customRoute => {
   router[r.metod](r.path, r.handler);
 });
 
+// проверка параметра userById на корректность ID
 router.param('userById', async(id, ctx, next) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     ctx.throw(404);
   }
 
-  ctx.userById = await User.findById(id);
+  ctx.userById = await Users.findById(id);
 
   if (!ctx.userById) {
     ctx.throw(404);
