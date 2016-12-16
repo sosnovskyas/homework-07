@@ -32,7 +32,6 @@ const getFiles = (path, files) => {
 
 getFiles(path.join(__dirname, '../routes'), routes);
 
-
 routes.forEach(customRoute => {
   const r = require(customRoute).route;
   router[r.metod](r.path, r.handler);
