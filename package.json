@@ -7,7 +7,9 @@
     "test": "test"
   },
   "scripts": {
+    "start": "NODE_ENV=development nodemon index.js",
     "test": "NODE_ENV=test mocha --harmony",
+    "test:watch": "NODE_ENV=test mocha -w --harmony ",
     "lint": "eslint ."
   },
   "author": "Sosnovsky Alexey <sosnovsky.as@gmail.com>",
@@ -25,7 +27,8 @@
     "koa-session-mongoose": "1.0.0",
     "koa-static": "2.0.0",
     "mongoose": "4.7.2",
-    "pug": "2.0.0-beta6"
+    "pug": "2.0.0-beta6",
+    "koa-convert": "latest"
   },
   "devDependencies": {
     "babel-eslint": "7.1.1",

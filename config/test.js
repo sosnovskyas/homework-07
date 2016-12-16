@@ -3,7 +3,7 @@ module.exports = {
   host: '127.0.0.1',
   port: 5000,
   mongoose: {
-    uri: 'mongodb://127.0.0.1/hw6',
+    uri: 'mongodb://127.0.0.1/hw7',
     options: {
       server: {
         socketOptions: {
