@@ -1,0 +1,7 @@
+{
+  "ignore": ["test", "db"],
+  "execMap": {
+    "js": "node --harmony"
+  },
+  "verbose": true
+}
