@@ -1,7 +1,16 @@
 {
-  "ignore": ["test", "db"],
+  "restartable": "rs",
+  "verbose": true,
   "execMap": {
     "js": "node --harmony"
   },
-  "verbose": true
+  "ext": "js json pug",
+  "watch": [
+    "index",
+    "app",
+    "middlewares/**/*",
+    "routes/**/*",
+    "templates/**/*",
+    "config/**/*"
+  ]
 }
