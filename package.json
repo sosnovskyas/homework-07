@@ -3,6 +3,14 @@
   "version": "0.0.1",
   "description": "basic backend for web service",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sosnovskyas/homework-07.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sosnovskyas/homework-07/issues"
+  },
+  "homepage": "https://github.com/sosnovskyas/homework-07#readme",
   "directories": {
     "test": "test"
   },
