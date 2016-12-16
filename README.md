@@ -12,7 +12,23 @@ $ git clone https://github.com/sosnovskyas/homework-07.git
 $ cd homework-07
 $ npm install
 ```
+
 ## Тесты
+Для запуска тестов в проекте есть npm скрипт 
+```
+$ npm test
+```
 
+Так же есть возможность запустить тесты в WATCH режиме
+```
+$ npm run test:watch
+```
 
-[Задачи](TASKS.md)
+## Разработка
+Для запуска проекта в режиме разработки со значением `NODE_ENV=development` и в WATCH режиме
+```
+$ npm start
+```
+
+## Задачи на разработку
+Задачи на разработку описаны в файле [TASKS.md](TASKS.md)
