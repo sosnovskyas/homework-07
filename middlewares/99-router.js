@@ -17,15 +17,28 @@ const mongoose = require('mongoose');
  }
  */
 
-const customRoutesPath = '/../routes';
-const customRoutes = fs.readdirSync(path.join(__dirname, customRoutesPath));
+let routes = [];
 
-customRoutes.forEach(customRoute => {
-  const r = require('../routes/' + customRoute).route;
+const getFiles = (path, files) => {
+  fs.readdirSync(path).forEach(function (file) {
+    let subpath = path + '/' + file;
+    if (fs.lstatSync(subpath).isDirectory()) {
+      getFiles(subpath, files);
+    } else {
+      files.push(path + '/' + file);
+    }
+  });
+};
+
+getFiles(path.join(__dirname, '../routes'), routes);
+
+
+routes.forEach(customRoute => {
+  const r = require(customRoute).route;
   router[r.metod](r.path, r.handler);
 });
 
-router.param('userById', async (id, ctx, next) => {
+router.param('userById', async(id, ctx, next) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     ctx.throw(404);
   }
