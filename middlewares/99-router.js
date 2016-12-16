@@ -44,7 +44,7 @@ router.param('userById', async(id, ctx, next) => {
     ctx.throw(404);
   }
 
-  ctx.userById = await Users.findById(id);
+  ctx.userById = await mongoose.Users.findById(id);
 
   if (!ctx.userById) {
     ctx.throw(404);
