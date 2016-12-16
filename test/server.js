@@ -16,9 +16,10 @@ let server;
 
 const serverPath = `http://${config.host}:${config.port}`;
 
-describe('server REST API', () => {
+describe('server', () => {
 
   before(done => {
+    //noinspection JSUnresolvedFunction
     server = app.listen(config.port, done);
   });
 
@@ -37,5 +38,8 @@ describe('server REST API', () => {
       should(response.statusCode).eql(200);
       should.exist(response.body);
     });
+  });
+
+  context('REST API', () => {
   });
 });
