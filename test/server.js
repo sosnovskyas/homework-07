@@ -3,18 +3,16 @@
 const should = require('should');
 
 const app = require('../app');
+const config = require('config');
 const request = require('request-promise').defaults({
   resolveWithFullResponse: true,
   simple: false
 });
 
-const config = require('config');
-
-let server;
-
-// const User = require('../models/user');
+const clearDatabase = require('../libs/clearDatabase');
 
 const serverPath = `http://${config.host}:${config.port}`;
+let server;
 
 describe('server', () => {
 
@@ -41,6 +39,16 @@ describe('server', () => {
   });
 
   describe('REST API', () => {
+    const mongoose = require('mongoose');
+
+    beforeEach(async ()=>{
+      await clearDatabase();
+    });
+
+    afterEach(async ()=>{
+      mongoose.connection.close();
+    });
+
     context('users', () => {
       it(`GET ${serverPath}/users response status 200`, async() => {
       /*it(`GET ${serverPath}/users response status 200 and list defaul users`, async() => {*/
