@@ -80,7 +80,7 @@ describe('server', () => {
         });
 
         should(response.statusCode).eql(200);
-        should(response.body).eql([
+        should(response.body).containDeep([
           {
             _id: '31ef97a095aa7859d9c6f43e',
             email: 'mk@javascript.ru',
