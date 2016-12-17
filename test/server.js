@@ -61,7 +61,6 @@ describe('server', () => {
     });
 
     context('users', () => {
-      // it(`GET ${serverPath}/users response status 200`, async() => {
       it(`GET ${serverPath}/users response status 200 and users list`, async() => {
         let response = await request({
           method: 'get',
