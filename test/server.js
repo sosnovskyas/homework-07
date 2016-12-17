@@ -197,6 +197,18 @@ describe('server', () => {
           displayName: 'MOLEX',
         });
       });
+      it(`PATCH ${serverPath}/users/000000000000000000000000 with user data response status 404 (Not Found)`, async() => {
+        const userData = {displayName: 'MOLEX'};
+
+        let response = await request({
+          method: 'patch',
+          uri: `${serverPath}/users/000000000000000000000000`,
+          body: userData,
+          json: true,
+        });
+
+        should(response.statusCode).eql(404);
+      });
       it(`PATCH ${serverPath}/users/31ef97a095aa7859d9c6f43e with incorrect email in user data response status 422 (validation error)`, async() => {
         const userData = {
           email: 'qwe'
