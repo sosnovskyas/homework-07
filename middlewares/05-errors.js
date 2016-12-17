@@ -3,7 +3,11 @@ module.exports = async(ctx, next) => {
   try {
     await next();
   } catch (e) {
-    if (e.status) {
+    if (e.errors) {
+      // Mongoose validation errors
+      ctx.status = 422; // validation errors
+      ctx.body = e.errors;
+    } else if (e.status) {
       // could use template methods to render error page
       ctx.body = e.message;
       ctx.status = e.status;
