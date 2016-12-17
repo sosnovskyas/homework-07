@@ -240,7 +240,7 @@ describe('server', () => {
         let response = await request({
           method: 'patch',
           uri: `${serverPath}/users/31ef97a095aa7859d9c6f43e`,
-          data: userData,
+          body: userData,
           json: true,
         });
         should(response.statusCode).eql(422);
