@@ -215,7 +215,7 @@ describe('server', () => {
         };
         let response = await request({
           method: 'patch',
-          uri: `${serverPath}/users`,
+          uri: `${serverPath}/users/31ef97a095aa7859d9c6f43e`,
           body: userData,
           json: true,
         });
@@ -240,10 +240,44 @@ describe('server', () => {
         let response = await request({
           method: 'patch',
           uri: `${serverPath}/users/31ef97a095aa7859d9c6f43e`,
-          data: userData,
+          body: userData,
           json: true,
         });
         should(response.statusCode).eql(422);
+      });
+
+      // delete user
+      it(`DELETE ${serverPath}/users/a5c9a78e68a0f5a85275ef53 with user data response status 202 (Accepted)`, async() => {
+        const userData = {displayName: 'MOLEX'};
+
+        let response = await request({
+          method: 'delete',
+          uri: `${serverPath}/users/a5c9a78e68a0f5a85275ef53`,
+          body: userData,
+          json: true,
+        });
+
+        should(response.statusCode).eql(202);
+
+        // checking changes data
+        let response2 = await request({
+          method: 'get',
+          uri: `${serverPath}/users/a5c9a78e68a0f5a85275ef53`,
+          json: true,
+        });
+        should(response2.statusCode).eql(404);
+      });
+      it(`DELETE ${serverPath}/users/000000000000000000000000 with user data response status 404 (Not Found)`, async() => {
+        const userData = {displayName: 'MOLEX'};
+
+        let response = await request({
+          method: 'delete',
+          uri: `${serverPath}/users/000000000000000000000000`,
+          body: userData,
+          json: true,
+        });
+
+        should(response.statusCode).eql(404);
       });
     });
   });
