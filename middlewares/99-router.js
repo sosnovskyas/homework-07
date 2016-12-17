@@ -56,4 +56,4 @@ router.param('userById', async(id, ctx, next) => {
   await next();
 });
 
-module.exports = router.routes();
+exports.init = app => app.use(router.routes());

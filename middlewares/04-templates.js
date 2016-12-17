@@ -5,35 +5,43 @@ const pug = require('pug');
 const config = require('config');
 const path = require('path');
 
-module.exports = async(ctx, next) => {
+exports.init = app => {
 
-  /* default helpers */
-  ctx.locals = {
-    /* at the time of ctx middleware, user is unknown, so we make it a getter */
-    get user() {
-      return ctx.req.user; // passport sets ctx
-    },
+  app.use(async(ctx, next) => {
+    /* default helpers */
+    ctx.locals = {
+      /* at the time of ctx middleware, user is unknown, so we make it a getter */
+      get user() {
+        return ctx.req.user; // passport sets ctx
+      },
 
-    get flash() {
-      return ctx.flash();
-    }
-  };
+      get flashMessages() {
+        return ctx.flashMessages;
+      },
 
-  ctx.render = (templatePath, locals) => {
-    locals = locals || {};
-    // warning!
-    // _.assign does NOT copy defineProperty
-    // so I use ctx.locals as a root and merge all props in it, instead of cloning ctx.locals
-    const localsFull = Object.create(ctx.locals);
+      csrf() {
+        // async function, not a property to prevent autogeneration
+        // pug touches all local properties
+        return ctx.req.user ? ctx.csrf : null;
+      }
+    };
 
-    for (const key in locals) {
-      localsFull[key] = locals[key];
-    }
+    ctx.render = (templatePath, locals) => {
+      locals = locals || {};
+      // use inheritance for all getters to work
+      const localsFull = Object.create(ctx.locals);
 
-    const templatePathResolved = path.join(config.template.root, templatePath + '.pug');
+      for (const key in locals) {
+        //noinspection JSUnfilteredForInLoop
+        localsFull[key] = locals[key];
+      }
 
-    return pug.renderFile(templatePathResolved, localsFull);
-  };
+      const templatePathResolved = path.join(config.template.root, templatePath + '.pug');
 
-  await next();
+      return pug.renderFile(templatePathResolved, localsFull, null);
+    };
+
+    await next();
+  });
+
 };
