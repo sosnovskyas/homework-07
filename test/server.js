@@ -172,7 +172,7 @@ describe('server', () => {
       });
 
       // change user
-      it(`PATCH ${serverPath}/users/31ef97a095aa7859d9c6f43e with user data response status 204 (No Content)`, async() => {
+      it(`PATCH ${serverPath}/users/31ef97a095aa7859d9c6f43e with user data response status 204 (No Content) and change user info`, async() => {
         const userData = {displayName: 'MOLEX'};
 
         let response = await request({
@@ -183,7 +183,19 @@ describe('server', () => {
         });
 
         should(response.statusCode).eql(204); // бикос стандарт ёмаё ))) RTFM you must - https://tools.ietf.org/html/rfc5789#section-2.1
-        should(response.body).containDeep(userData);
+
+        // checking changes data
+        let response2 = await request({
+          method: 'get',
+          uri: `${serverPath}/users/31ef97a095aa7859d9c6f43e`,
+          json: true,
+        });
+        should(response2.statusCode).eql(200);
+        should(response2.body).containDeep({
+          _id: '31ef97a095aa7859d9c6f43e',
+          email: 'mk@javascript.ru',
+          displayName: 'MOLEX',
+        });
       });
       it(`PATCH ${serverPath}/users/31ef97a095aa7859d9c6f43e with incorrect email in user data response status 422 (validation error)`, async() => {
         const userData = {
