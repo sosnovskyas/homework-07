@@ -1,6 +1,6 @@
 'use strict';
-
-const dbApi = require('../../libs/dbApi');
+const config = require('config');
+const dbApi = require(`${config.root}/libs/dbApi`);
 
 const handler = async(ctx) => {
   let userModel = dbApi.getModel('user');
