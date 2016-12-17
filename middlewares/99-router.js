@@ -43,7 +43,7 @@ routes.forEach(customRoute => {
 // проверка параметра userById на корректность ID
 router.param('userById', async(id, ctx, next) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    ctx.throw(404);
+    ctx.throw(415);
   }
 
   let userModel = dbApi.getModel('user');
