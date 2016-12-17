@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   host: '127.0.0.1',
-  port: 5000,
+  port: 6000,
   mongoose: {
     uri: 'mongodb://127.0.0.1/hw7-test',
     options: {
