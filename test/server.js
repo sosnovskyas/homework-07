@@ -45,12 +45,7 @@ describe('server', () => {
     beforeEach(async() => {
       await mongoose.connection.dropDatabase();
 
-      let Users;
-      try {
-        Users = mongoose.model('User');
-      } catch (error) {
-        Users = require('../models/user');
-      }
+      let Users = mongoose.model('User');
       await Promise.all(
         require('../fixtures/users').User // users array
           .map(
