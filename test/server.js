@@ -4,6 +4,7 @@ const config = require('config');
 const should = require('should');
 
 const app = require(`${config.root}/app`);
+const mongoose = require(`${config.root}/libs/mongoose`);
 const dbApi = require(`${config.root}/libs/dbApi`);
 const request = require('request-promise').defaults({
   resolveWithFullResponse: true,
@@ -39,7 +40,6 @@ describe('server', () => {
   });
 
   describe('REST API', () => {
-    const mongoose = require(`${config.root}/libs/mongoose`);
 
     beforeEach(async() => {
       await mongoose.connection.dropDatabase();
