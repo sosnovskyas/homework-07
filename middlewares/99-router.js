@@ -2,11 +2,13 @@
 
 const fs = require('fs');
 const path = require('path');
+const config = require('config');
 
 const Router = require('koa-router');
 const router = new Router();
 
 const mongoose = require('mongoose');
+const dbApi = require(`${config.root}/libs/dbApi`);
 
 /*
  async function *isAuthenticated(next) {
@@ -41,10 +43,11 @@ routes.forEach(customRoute => {
 // проверка параметра userById на корректность ID
 router.param('userById', async(id, ctx, next) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    ctx.throw(404);
+    ctx.throw(415);
   }
 
-  ctx.userById = await mongoose.Users.findById(id);
+  let userModel = dbApi.getModel('user');
+  ctx.userById = await userModel.findById(id);
 
   if (!ctx.userById) {
     ctx.throw(404);

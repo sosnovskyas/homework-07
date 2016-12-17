@@ -40,11 +40,8 @@ describe('server', () => {
   });
 
   describe('REST API', () => {
-
-    beforeEach(async() => {
+    before(async() => {
       await mongoose.connection.dropDatabase();
-
-      // let Users = mongoose.model('User');
       let Users = dbApi.getModel('user');
       await Promise.all(
         require(fixturesPath).User // users array
@@ -57,7 +54,7 @@ describe('server', () => {
       );
     });
 
-    afterEach(async() => {
+    after(async() => {
       await mongoose.connection.close();
     });
 
@@ -82,6 +79,35 @@ describe('server', () => {
             displayName: 'iliakan',
           }
         ]);
+      });
+      it(`GET ${serverPath}/users/31ef97a095aa7859d9c6f43e response status 200 and users information`, async() => {
+        let response = await request({
+          method: 'get',
+          uri: `${serverPath}/users/31ef97a095aa7859d9c6f43e`,
+          json: true,
+        });
+        should(response.statusCode).eql(200);
+        should(response.body).containDeep({
+          _id: '31ef97a095aa7859d9c6f43e',
+          email: 'mk@javascript.ru',
+          displayName: 'mk',
+        });
+      });
+      it(`GET ${serverPath}/users/qwe123 response status 415 (Unsupported Media Type)`, async() => {
+        let response = await request({
+          method: 'get',
+          uri: `${serverPath}/users/qwe123`,
+          json: true,
+        });
+        should(response.statusCode).eql(415);
+      });
+      it(`GET ${serverPath}/users/000000000000000000000000 response status 404 (not found)`, async() => {
+        let response = await request({
+          method: 'get',
+          uri: `${serverPath}/users/000000000000000000000000`,
+          json: true,
+        });
+        should(response.statusCode).eql(404);
       });
     });
   });
