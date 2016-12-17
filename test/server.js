@@ -109,7 +109,7 @@ describe('server', () => {
         });
         should(response.statusCode).eql(404);
       });
-      it(`POST ${serverPath}/users with user data response status 200 and users`, async() => {
+      it(`POST ${serverPath}/users with user data response status 201 (created) and user`, async() => {
         const userData = {email: 'alex@mymail.com', displayName: 'alex', password: 'qweqweqwe'};
         const checkData = {email: 'alex@mymail.com', displayName: 'alex'};
 
@@ -120,7 +120,7 @@ describe('server', () => {
           json: true,
         });
 
-        should(response.statusCode).eql(200);
+        should(response.statusCode).eql(201);
         should(response.body).containDeep(checkData);
       });
       it(`POST ${serverPath}/users with incorrect email in user data response status 422 (validation error)`, async() => {
