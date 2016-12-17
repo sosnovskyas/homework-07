@@ -109,6 +109,63 @@ describe('server', () => {
         });
         should(response.statusCode).eql(404);
       });
+      it(`POST ${serverPath}/users with user data response status 200 and users`, async() => {
+        const userData = {
+          email: 'alex@mymail.com',
+          displayName: 'alex',
+          password: 'qweqweqwe'
+        };
+        let response = await request({
+          method: 'post',
+          uri: `${serverPath}/users`,
+          data: userData,
+          json: true,
+        });
+        should(response.statusCode).eql(200);
+        should(response.body).containDeep(userData);
+      });
+      it(`POST ${serverPath}/users with incorrect email in user data response status 400`, async() => {
+        const userData = {
+          email: 'qwe',
+          displayName: 'alex',
+          password: 'qweqweqwe'
+        };
+        let response = await request({
+          method: 'post',
+          uri: `${serverPath}/users`,
+          data: userData,
+          json: true,
+        });
+        should(response.statusCode).eql(400);
+      });
+      it(`POST ${serverPath}/users without displayName in user data response status 400`, async() => {
+        const userData = {
+          email: 'qwe@qwe.ru',
+          displayName: '',
+          password: 'qweqweqwe'
+        };
+        let response = await request({
+          method: 'post',
+          uri: `${serverPath}/users`,
+          data: userData,
+          json: true,
+        });
+        should(response.statusCode).eql(400);
+      });
+      it(`POST ${serverPath}/users without password in user data response status 400`, async() => {
+        const userData = {
+          email: 'qwe@qwe.ru',
+          displayName: 'alex',
+          password: ''
+        };
+        let response = await request({
+          method: 'post',
+          uri: `${serverPath}/users`,
+          data: userData,
+          json: true,
+        });
+        should(response.statusCode).eql(400);
+      });
     });
   });
 });
