@@ -59,6 +59,7 @@ describe('server', () => {
     });
 
     context('users', () => {
+      // get all users
       it(`GET ${serverPath}/users response status 200 and users list`, async() => {
         let response = await request({
           method: 'get',
@@ -80,6 +81,8 @@ describe('server', () => {
           }
         ]);
       });
+
+      // get user by ID
       it(`GET ${serverPath}/users/31ef97a095aa7859d9c6f43e response status 200 and users information`, async() => {
         let response = await request({
           method: 'get',
@@ -109,6 +112,8 @@ describe('server', () => {
         });
         should(response.statusCode).eql(404);
       });
+
+      // create user
       it(`POST ${serverPath}/users with user data response status 201 (created) and user`, async() => {
         const userData = {email: 'alex@mymail.com', displayName: 'alex', password: 'qweqweqwe'};
         const checkData = {email: 'alex@mymail.com', displayName: 'alex'};
@@ -160,6 +165,69 @@ describe('server', () => {
         let response = await request({
           method: 'post',
           uri: `${serverPath}/users`,
+          data: userData,
+          json: true,
+        });
+        should(response.statusCode).eql(422);
+      });
+
+      // change user
+      it(`PATCH ${serverPath}/users/31ef97a095aa7859d9c6f43e with user data response status 204 (No Content) and change user info`, async() => {
+        const userData = {displayName: 'MOLEX'};
+
+        let response = await request({
+          method: 'patch',
+          uri: `${serverPath}/users/31ef97a095aa7859d9c6f43e`,
+          body: userData,
+          json: true,
+        });
+
+        should(response.statusCode).eql(204); // бикос стандарт ёмаё ))) RTFM you must - https://tools.ietf.org/html/rfc5789#section-2.1
+
+        // checking changes data
+        let response2 = await request({
+          method: 'get',
+          uri: `${serverPath}/users/31ef97a095aa7859d9c6f43e`,
+          json: true,
+        });
+        should(response2.statusCode).eql(200);
+        should(response2.body).containDeep({
+          _id: '31ef97a095aa7859d9c6f43e',
+          email: 'mk@javascript.ru',
+          displayName: 'MOLEX',
+        });
+      });
+      it(`PATCH ${serverPath}/users/31ef97a095aa7859d9c6f43e with incorrect email in user data response status 422 (validation error)`, async() => {
+        const userData = {
+          email: 'qwe'
+        };
+        let response = await request({
+          method: 'patch',
+          uri: `${serverPath}/users`,
+          body: userData,
+          json: true,
+        });
+        should(response.statusCode).eql(422);
+      });
+      it(`PATCH ${serverPath}/users/31ef97a095aa7859d9c6f43e without displayName in user data response status 422 (validation error)`, async() => {
+        const userData = {
+          displayName: ''
+        };
+        let response = await request({
+          method: 'patch',
+          uri: `${serverPath}/users/31ef97a095aa7859d9c6f43e`,
+          body: userData,
+          json: true,
+        });
+        should(response.statusCode).eql(422);
+      });
+      it(`PATCH ${serverPath}/users/31ef97a095aa7859d9c6f43e without password in user data response status 422 (validation error)`, async() => {
+        const userData = {
+          password: ''
+        };
+        let response = await request({
+          method: 'patch',
+          uri: `${serverPath}/users/31ef97a095aa7859d9c6f43e`,
           data: userData,
           json: true,
         });
