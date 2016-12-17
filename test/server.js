@@ -93,6 +93,22 @@ describe('server', () => {
           displayName: 'mk',
         });
       });
+      it(`GET ${serverPath}/users/qwe123 response status 415 (Unsupported Media Type)`, async() => {
+        let response = await request({
+          method: 'get',
+          uri: `${serverPath}/users/qwe123`,
+          json: true,
+        });
+        should(response.statusCode).eql(415);
+      });
+      it(`GET ${serverPath}/users/000000000000000000000000 response status 404 (not found)`, async() => {
+        let response = await request({
+          method: 'get',
+          uri: `${serverPath}/users/000000000000000000000000`,
+          json: true,
+        });
+        should(response.statusCode).eql(404);
+      });
     });
   });
 });
