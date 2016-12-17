@@ -2,11 +2,13 @@
 
 const fs = require('fs');
 const path = require('path');
+const config = require('config');
 
 const Router = require('koa-router');
 const router = new Router();
 
 const mongoose = require('mongoose');
+const dbApi = require(`${config.root}/libs/dbApi`);
 
 /*
  async function *isAuthenticated(next) {
@@ -44,7 +46,8 @@ router.param('userById', async(id, ctx, next) => {
     ctx.throw(404);
   }
 
-  ctx.userById = await mongoose.Users.findById(id);
+  let userModel = dbApi.getModel('user');
+  ctx.userById = await userModel.findById(id);
 
   if (!ctx.userById) {
     ctx.throw(404);
