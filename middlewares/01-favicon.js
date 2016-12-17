@@ -1,5 +1,5 @@
-
 // Usually served by Nginx
 const favicon = require('koa-favicon');
+const convert = require('koa-convert');
 
-exports.init = app => app.use(favicon());
+module.exports = convert(favicon());
