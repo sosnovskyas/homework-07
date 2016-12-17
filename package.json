@@ -27,7 +27,10 @@
   "dependencies": {
     "babel-eslint": "7.1.1",
     "config": "1.24.0",
+    "istanbul-harmony": "0.3.16",
     "koa": "2.0.0",
+    "koa-bodyparser": "latest",
+    "koa-convert": "latest",
     "koa-csrf": "latest",
     "koa-favicon": "2.0.0",
     "koa-generic-session": "1.11.4",
@@ -36,10 +39,8 @@
     "koa-session-mongoose": "1.0.0",
     "koa-static": "2.0.0",
     "mongoose": "4.7.2",
-    "pug": "2.0.0-beta6",
-    "koa-convert": "latest",
     "mongoose-beautiful-unique-validation": "5.1.1",
-    "koa-bodyparser": "latest"
+    "pug": "2.0.0-beta6"
   },
   "devDependencies": {
     "babel-eslint": "7.1.1",

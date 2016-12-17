@@ -3,7 +3,7 @@ module.exports = async(ctx, next) => {
   try {
     await next();
   } catch (e) {
-    if (e.errors) {
+    if (e.name == 'ValidationError') {
       // Mongoose validation errors
       ctx.status = 422; // validation errors
       ctx.body = e.errors;
