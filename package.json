@@ -1,6 +1,6 @@
 {
   "name": "homework-07",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "basic backend for web service",
   "main": "index.js",
   "repository": {
@@ -18,14 +18,15 @@
     "start": "NODE_ENV=development nodemon index.js",
     "test": "NODE_ENV=test mocha --harmony",
     "test:watch": "NODE_ENV=test mocha -w --harmony ",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "db:start": "mongod --dbpath ./db/",
+    "db:stop": "pkill mongo"
   },
   "author": "Sosnovsky Alexey <sosnovsky.as@gmail.com>",
   "license": "GPL-3.0",
   "dependencies": {
     "babel-eslint": "7.1.1",
     "config": "1.24.0",
-    "eslint": "3.12.2",
     "koa": "2.0.0",
     "koa-csrf": "latest",
     "koa-favicon": "2.0.0",
@@ -36,11 +37,14 @@
     "koa-static": "2.0.0",
     "mongoose": "4.7.2",
     "pug": "2.0.0-beta6",
-    "koa-convert": "latest"
+    "koa-convert": "latest",
+    "mongoose-beautiful-unique-validation": "5.1.1"
   },
   "devDependencies": {
     "babel-eslint": "7.1.1",
+    "es6-promisify": "5.0.0",
     "eslint": "3.12.2",
+    "mocha": "3.2.0",
     "request": "2.79.0",
     "request-promise": "4.1.1",
     "should": "11.1.1"

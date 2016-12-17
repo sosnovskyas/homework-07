@@ -32,7 +32,9 @@
       "error",
       "always"
     ],
-    "brace-style": ["error", "stroustrup"],
+    "brace-style": [
+      "error"
+    ],
     "guard-for-in": "off"
   }
 }
