@@ -110,21 +110,20 @@ describe('server', () => {
         should(response.statusCode).eql(404);
       });
       it(`POST ${serverPath}/users with user data response status 200 and users`, async() => {
-        const userData = {
-          email: 'alex@mymail.com',
-          displayName: 'alex',
-          password: 'qweqweqwe'
-        };
+        const userData = {email: 'alex@mymail.com', displayName: 'alex', password: 'qweqweqwe'};
+        const checkData = {email: 'alex@mymail.com', displayName: 'alex'};
+
         let response = await request({
           method: 'post',
           uri: `${serverPath}/users`,
-          data: userData,
+          body: userData,
           json: true,
         });
+
         should(response.statusCode).eql(200);
-        should(response.body).containDeep(userData);
+        should(response.body).containDeep(checkData);
       });
-      it(`POST ${serverPath}/users with incorrect email in user data response status 400`, async() => {
+      it(`POST ${serverPath}/users with incorrect email in user data response status 422 (validation error)`, async() => {
         const userData = {
           email: 'qwe',
           displayName: 'alex',
@@ -133,12 +132,12 @@ describe('server', () => {
         let response = await request({
           method: 'post',
           uri: `${serverPath}/users`,
-          data: userData,
+          body: userData,
           json: true,
         });
-        should(response.statusCode).eql(400);
+        should(response.statusCode).eql(422);
       });
-      it(`POST ${serverPath}/users without displayName in user data response status 400`, async() => {
+      it(`POST ${serverPath}/users without displayName in user data response status 422 (validation error)`, async() => {
         const userData = {
           email: 'qwe@qwe.ru',
           displayName: '',
@@ -147,12 +146,12 @@ describe('server', () => {
         let response = await request({
           method: 'post',
           uri: `${serverPath}/users`,
-          data: userData,
+          body: userData,
           json: true,
         });
-        should(response.statusCode).eql(400);
+        should(response.statusCode).eql(422);
       });
-      it(`POST ${serverPath}/users without password in user data response status 400`, async() => {
+      it(`POST ${serverPath}/users without password in user data response status 422 (validation error)`, async() => {
         const userData = {
           email: 'qwe@qwe.ru',
           displayName: 'alex',
@@ -164,7 +163,7 @@ describe('server', () => {
           data: userData,
           json: true,
         });
-        should(response.statusCode).eql(400);
+        should(response.statusCode).eql(422);
       });
     });
   });
