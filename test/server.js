@@ -215,7 +215,7 @@ describe('server', () => {
         };
         let response = await request({
           method: 'patch',
-          uri: `${serverPath}/users`,
+          uri: `${serverPath}/users/31ef97a095aa7859d9c6f43e`,
           body: userData,
           json: true,
         });
