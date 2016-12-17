@@ -12,7 +12,7 @@ const request = require('request-promise').defaults({
 
 let server;
 const serverPath = `http://${config.host}:${config.port}`;
-// const fixturesPath = path.join(__dirname, `../fixtures/users`);
+const fixturesPath = path.join(__dirname, `../fixtures/users`);
 
 describe('server', () => {
 
@@ -46,7 +46,7 @@ describe('server', () => {
 
       let Users = mongoose.model('User');
       await Promise.all(
-        require('../fixtures/users').User // users array
+        require(fixturesPath).User // users array
           .map(
             item => {
               let newUser = new Users(item);
