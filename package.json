@@ -1,6 +1,6 @@
 {
   "name": "homework-07",
-  "version": "0.3.0",
+  "version": "0.2.0",
   "description": "basic backend for web service",
   "main": "index.js",
   "repository": {
@@ -38,8 +38,7 @@
     "mongoose": "4.7.2",
     "pug": "2.0.0-beta6",
     "koa-convert": "latest",
-    "mongoose-beautiful-unique-validation": "5.1.1",
-    "koa-bodyparser": "latest"
+    "mongoose-beautiful-unique-validation": "5.1.1"
   },
   "devDependencies": {
     "babel-eslint": "7.1.1",
