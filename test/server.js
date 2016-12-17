@@ -10,10 +10,9 @@ const request = require('request-promise').defaults({
   simple: false
 });
 
-const serverPath = `http://${config.host}:${config.port}`;
-const fixturesPath = path.join(__dirname, `../fixtures/users`);
-
 let server;
+const serverPath = `http://${config.host}:${config.port}`;
+// const fixturesPath = path.join(__dirname, `../fixtures/users`);
 
 describe('server', () => {
 
@@ -57,11 +56,7 @@ describe('server', () => {
       );
     });
 
-
     afterEach(async() => {
-      // await mongoose.model('User').find({}, (err, res) => {
-      //   console.log(res)
-      // });
       await mongoose.connection.close();
     });
 
