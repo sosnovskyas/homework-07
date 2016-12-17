@@ -1,17 +1,10 @@
 'use strict';
 
-const mongoose = require('mongoose');
+const dbApi = require('../../libs/dbApi');
 
 const handler = async(ctx) => {
-  let Users;
-
-  try {
-    Users = mongoose.model('User');
-  } catch (error) {
-    Users = require('../../models/user');
-  }
-
-  ctx.body = await Users.find({});
+  let userModel = dbApi.getModel('user');
+  ctx.body = await userModel.find({});
 };
 
 exports.route = {

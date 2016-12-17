@@ -1,10 +1,10 @@
 'use strict';
 
-const path = require('path');
+const config = require('config');
 const should = require('should');
 
-const app = require('../app');
-const config = require('config');
+const app = require(`${config.root}/app`);
+const dbApi = require(`${config.root}/libs/dbApi`);
 const request = require('request-promise').defaults({
   resolveWithFullResponse: true,
   simple: false
@@ -12,7 +12,7 @@ const request = require('request-promise').defaults({
 
 let server;
 const serverPath = `http://${config.host}:${config.port}`;
-const fixturesPath = path.join(__dirname, `../fixtures/users`);
+const fixturesPath = `${config.root}/fixtures/users`;
 
 describe('server', () => {
 
@@ -39,12 +39,13 @@ describe('server', () => {
   });
 
   describe('REST API', () => {
-    const mongoose = require('../libs/mongoose');
+    const mongoose = require(`${config.root}/libs/mongoose`);
 
     beforeEach(async() => {
       await mongoose.connection.dropDatabase();
 
-      let Users = mongoose.model('User');
+      // let Users = mongoose.model('User');
+      let Users = dbApi.getModel('user');
       await Promise.all(
         require(fixturesPath).User // users array
           .map(
