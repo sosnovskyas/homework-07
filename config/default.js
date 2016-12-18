@@ -6,9 +6,23 @@ module.exports = {
   // or a separate config
   secret: 'mysecret',
   app: {
+    host: '127.0.0.1',
     port: 5000
   },
-
+  providers: {
+    facebook: {
+      appId: '1584514044907807',
+      appSecret: 'f0f14ef63e0c6b9ec549b9b15f63a808',
+      test: {
+        login: 'course.test.facebook@gmail.com',
+        password: 'course-test-facebook'
+      },
+      passportOptions: {
+        display: 'popup',
+        scope: ['email']
+      }
+    }
+  },
   mongoose: {
     uri: 'mongodb://127.0.0.1/hw7',
     options: {
