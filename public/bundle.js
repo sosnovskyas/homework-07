@@ -8,9 +8,7 @@ const onLoginSubmit = () => {
   ;
 };
 
-const onRegisterSubmit = event => {
-  // const target = event.target;
-  event.preventDefault();
+const onRegisterSubmit = () => {
   fetch('/register', {method: 'post'})
     .catch(console.error)
   ;

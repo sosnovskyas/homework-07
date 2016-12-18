@@ -5,6 +5,7 @@ const config = require('config');
 const sendMail = require('../../libs/sendMail');
 
 const handler = async(ctx) => {
+  console.log(ctx.request.body);
   let User = dbApi.getModel('user');
   const verifyEmailToken = Math.random().toString(36).slice(2, 10);
   const user = new User({
@@ -39,7 +40,7 @@ const handler = async(ctx) => {
     template: 'verify-registration-email',
     to: user.email,
     subject: 'Подтверждение email',
-    link: config.server.siteHost + '/verify-email/' + verifyEmailToken
+    link: config.app.host + '/verify-email/' + verifyEmailToken
   });
 
   ctx.body = 'Вы зарегистрированы. Пожалуйста, загляните в почтовый ящик, там письмо с Email-подтверждением.';
