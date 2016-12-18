@@ -2,7 +2,7 @@ extends layout
 
 block content
 
-  form(action="/login" method="post")
+  form(action="/login" method="post").login-form
     h1 Please sign in
 
     .form-group
@@ -12,7 +12,7 @@ block content
       label(for="password") Password
       input.form-control(type="password" id="password" name="password" required)
 
-    button.btn.btn-lg.btn-primary.btn-block(type="submit") Login
+    button.btn.btn-lg.btn-primary.btn-block.login(type="submit") Login
 
   p
     a(href="/register") or register
