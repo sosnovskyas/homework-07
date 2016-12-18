@@ -6,7 +6,7 @@ const handler = async(ctx) => {
   let User = dbApi.getModel('user');
   const verifyEmailToken = Math.random().toString(36).slice(2, 10);
   const user = new User({
-    email: ctx.request.body.email.toLowerCase(),
+    email: ctx.request.body.email,
     displayName: ctx.request.body.displayName,
     password: ctx.request.body.password,
     verifiedEmail: false,
