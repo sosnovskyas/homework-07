@@ -1,6 +1,8 @@
 'use strict';
 
 const dbApi = require('../../libs/dbApi');
+const config = require('config');
+const sendMail = require('../../libs/sendMail');
 
 const handler = async(ctx) => {
   let User = dbApi.getModel('user');
@@ -33,12 +35,12 @@ const handler = async(ctx) => {
 
   // We're here if no errors happened
 
-  // await sendMail({
-  //   template: 'verify-registration-email',
-  //   to: user.email,
-  //   subject: "Подтверждение email",
-  //   link: config.server.siteHost + '/verify-email/' + verifyEmailToken
-  // });
+  await sendMail({
+    template: 'verify-registration-email',
+    to: user.email,
+    subject: 'Подтверждение email',
+    link: config.server.siteHost + '/verify-email/' + verifyEmailToken
+  });
 
   ctx.body = 'Вы зарегистрированы. Пожалуйста, загляните в почтовый ящик, там письмо с Email-подтверждением.';
 };
