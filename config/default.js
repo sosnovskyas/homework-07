@@ -45,13 +45,13 @@ module.exports = {
       default:  {
         fromEmail: 'course.test.mailer@gmail.com',
         fromName:  'JavaScript.ru',
-        signature: "<em>С уважением,<br>Илья Кантор</em>"
+        signature: '<em>С уважением,<br>Я</em>'
       },
       // newsletters
       informer: {
         fromEmail: 'someother@email.com',
         fromName:  'Newsletters',
-        signature: "<em>Have fun!</em>"
+        signature: '<em>Have fun!</em>'
       }
     }
   },
