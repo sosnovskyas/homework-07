@@ -34,6 +34,27 @@ module.exports = {
       }
     }
   },
+  mailer: {
+    transport: 'gmail',
+    gmail: {
+      user: 'course.test.mailer',
+      password: 'course-test-password'
+    },
+    senders:  {
+      // transactional emails, register/forgot pass etc
+      default:  {
+        fromEmail: 'course.test.mailer@gmail.com',
+        fromName:  'JavaScript.ru',
+        signature: "<em>С уважением,<br>Илья Кантор</em>"
+      },
+      // newsletters
+      informer: {
+        fromEmail: 'someother@email.com',
+        fromName:  'Newsletters',
+        signature: "<em>Have fun!</em>"
+      }
+    }
+  },
   crypto: {
     hash: {
       length: 128,
