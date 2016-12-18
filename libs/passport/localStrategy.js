@@ -1,6 +1,5 @@
-// let passport = require('koa-passport');
 let LocalStrategy = require('passport-local');
-let User = require('../../models/user');
+const dbApi = require('../dbApi');
 
 // Стратегия берёт поля из req.body
 // Вызывает для них функцию
@@ -18,7 +17,7 @@ module.exports = new LocalStrategy(
   // done(err) ->
   //   strategy.error(err)
   function (req, email, password, done) {
-    User.findOne({email}, function (err, user) {
+    dbApi.getModel('user').findOne({email}, function (err, user) {
       if (err) {
         return done(err);
       }
