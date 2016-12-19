@@ -6,17 +6,52 @@ module.exports = {
   // or a separate config
   secret: 'mysecret',
   app: {
+    host: 'localhost',
     port: 5000
   },
-
+  providers: {
+    facebook: {
+      appId: '1832999316969853',
+      appSecret: '187b7856b36ebfb07db10f67e54a2ea2',
+      test: {
+        login: 'course.test.facebook@gmail.com',
+        password: 'course-test-facebook'
+      },
+      passportOptions: {
+        display: 'popup',
+        scope: ['email']
+      }
+    }
+  },
   mongoose: {
-    uri: 'mongodb://127.0.0.1/hw7',
+    uri: 'mongodb://localhost/hw7',
     options: {
       server: {
         socketOptions: {
           keepAlive: 1
         },
         poolSize: 5
+      }
+    }
+  },
+  mailer: {
+    transport: 'gmail',
+    gmail: {
+      user: 'course.test.mailer',
+      password: 'course-test-password'
+    },
+    senders:  {
+      // transactional emails, register/forgot pass etc
+      default:  {
+        fromEmail: 'course.test.mailer@gmail.com',
+        fromName:  'JavaScript.ru',
+        signature: '<em>С уважением,<br>Я</em>'
+      },
+      // newsletters
+      informer: {
+        fromEmail: 'someother@email.com',
+        fromName:  'Newsletters',
+        signature: '<em>Have fun!</em>'
       }
     }
   },

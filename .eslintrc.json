@@ -35,6 +35,15 @@
     "brace-style": [
       "error"
     ],
-    "guard-for-in": "off"
+    "guard-for-in": "off",
+    "no-console": [
+      "error",
+      {
+        "allow": [
+          "warn",
+          "error"
+        ]
+      }
+    ]
   }
 }

@@ -1,7 +1,11 @@
 'use strict';
 
 const handler = async(ctx) => {
-  ctx.body = ctx.userById;
+  if (ctx.isAuthenticated()) {
+    ctx.body = ctx.userById;
+  } else {
+    ctx.status = 401;
+  }
 };
 
 exports.route = {

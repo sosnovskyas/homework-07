@@ -1,0 +1,37 @@
+let LocalStrategy = require('passport-local');
+const dbApi = require('../dbApi');
+
+// Стратегия берёт поля из req.body
+// Вызывает для них функцию
+module.exports = new LocalStrategy(
+  {
+    usernameField: 'email', // 'username' by default
+    passwordField: 'password',
+    passReqToCallback: true // req for more complex cases
+  },
+  // Три возможных итога функции
+  // done(null, user[, info]) ->
+  //   strategy.success(user, info)
+  // done(null, false[, info]) ->
+  //   strategy.fail(info)
+  // done(err) ->
+  //   strategy.error(err)
+  function (req, email, password, done) {
+    dbApi.getModel('user').findOne({email}, function (err, user) {
+      if (err) {
+        return done(err);
+      }
+
+      if (!user || !user.checkPassword(password)) {
+        // don't say whether the user exists
+        return done(null, false, {message: 'Нет такого пользователя или пароль неверен.'});
+      }
+
+      // if (!user.verifiedEmail) {
+      //   return done(null, false, {message: 'Email не подтверждён'});
+      // }
+
+      return done(null, user);
+    });
+  }
+);
