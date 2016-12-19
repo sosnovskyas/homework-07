@@ -6,7 +6,7 @@ module.exports = {
   // or a separate config
   secret: 'mysecret',
   app: {
-    host: '127.0.0.1',
+    host: 'localhost',
     port: 5000
   },
   providers: {
@@ -24,7 +24,7 @@ module.exports = {
     }
   },
   mongoose: {
-    uri: 'mongodb://127.0.0.1/hw7',
+    uri: 'mongodb://localhost/hw7',
     options: {
       server: {
         socketOptions: {

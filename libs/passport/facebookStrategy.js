@@ -40,7 +40,8 @@ module.exports = new FacebookStrategy(
   {
     clientID: config.providers.facebook.appId,
     clientSecret: config.providers.facebook.appSecret,
-    callbackURL: `${config.app.host}/oauth/facebook`,
+    // callbackURL: `${config.app.host}/oauth/facebook`,
+    callbackURL: `/users`,
     // fields are described here:
     // https://developers.facebook.com/docs/graph-api/reference/v2.7/user
     profileURL: 'https://graph.facebook.com/me?fields=id,about,email,gender,link,locale,timezone,name,last_name,first_name,middle_name',
