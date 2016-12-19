@@ -1,4 +1,6 @@
-const User = require('../../models/user');
+const dbApi = require('../dbApi');
+// const User = require('../../models/user');
+const User = dbApi.getModel('user');
 // const config = require('config');
 // const co = require('co');
 // const request = require('request-promise');
@@ -7,7 +9,7 @@ function UserAuthError(message) {
   this.message = message;
 }
 
-module.exports = async function(req, profile, done) {
+module.exports = async(req, profile, done) => {
   // profile = the data returned by the facebook graph api
 
   // console.log(profile);
@@ -24,7 +26,7 @@ module.exports = async function(req, profile, done) {
     // look for another user already using ctx profile
     const alreadyConnectedUser = await User.findOne({
       'providers.nameId': providerNameId,
-      _id:                {$ne: userToConnect._id}
+      _id: {$ne: userToConnect._id}
     });
 
     if (alreadyConnectedUser) {
@@ -119,8 +121,8 @@ function mergeProfile(user, profile) {
   }
 
   user.providers.push({
-    name:    profile.provider,
-    nameId:  makeProviderId(profile),
+    name: profile.provider,
+    nameId: makeProviderId(profile),
     profile: profile
   });
 
