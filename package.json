@@ -45,6 +45,7 @@
     "mongoose-beautiful-unique-validation": "5.1.1",
     "nodemailer": "2.7.0",
     "nodemailer-html-to-text": "2.1.0",
+    "nodemailer-sendmail-transport": "1.0.0",
     "nodemailer-ses-transport": "1.5.0",
     "nodemailer-smtp-transport": "latest",
     "nodemailer-stub-transport": "1.1.0",
